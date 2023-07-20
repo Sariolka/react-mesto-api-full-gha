@@ -1,0 +1,5 @@
+@media (max-width: 580px) {
+  .header__mobile-signout {
+    grid-template-columns: 1fr auto;
+  }
+}

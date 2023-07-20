@@ -1,0 +1,38 @@
+.profile__avatar-button {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-right: 30px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+}
+
+.profile__avatar-button::after {
+  background-color: rgba(0, 0, 0, .8);
+  background-image: url(../../../images/editbutton.svg);
+  background-size: 26px;
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.profile__avatar-button:hover:after {
+  opacity: .8;
+}
+
+
+@media (max-width: 680px) {
+  .profile__avatar-button {
+    margin-right: 0;
+    margin-bottom: 22.2px;
+  }
+}

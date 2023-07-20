@@ -1,0 +1,6 @@
+.card__footer {
+  max-width: 246px;
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 15px 18px 21px;
+}

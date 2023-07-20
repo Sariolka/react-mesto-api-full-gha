@@ -1,0 +1,10 @@
+.popup__error-name {
+  position: absolute;
+  top: 62px;
+}
+
+@media (max-width: 520px) {
+  .popup__error-name {
+    line-height: 0.9;
+  }
+}

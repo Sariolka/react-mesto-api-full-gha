@@ -1,0 +1,22 @@
+.header {
+  max-width: 880px;
+  margin: 0 auto;
+  padding-top: 45px;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: 1fr auto;
+}
+
+@media (max-width: 900px) {
+  .header {
+    padding: 34px 30px 31.6px;
+  }
+}
+
+@media (max-width: 580px) {
+  .header {
+    padding: 0;
+    grid-template-columns: 100%;
+  }
+}

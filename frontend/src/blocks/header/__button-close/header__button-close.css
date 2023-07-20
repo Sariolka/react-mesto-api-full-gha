@@ -1,0 +1,19 @@
+.header__button-close {
+  display: none;
+}
+
+@media (max-width: 580px) {
+  .header__button-close {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    background-image: url(../../../images/Close-Icon.svg);
+    transition: opacity 0.5s ease;
+    border: none;
+    background-color: transparent;
+    background-size: cover;
+    cursor: pointer;
+    background-position: 100%;
+    margin-top: 3px;
+  }
+}

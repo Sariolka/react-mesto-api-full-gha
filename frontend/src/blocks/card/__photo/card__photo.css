@@ -1,0 +1,33 @@
+.card__photo {
+  width: 282px;
+  border-radius: 10px 10px 0 0;
+  aspect-ratio: 1 / 1;
+  object-position: center;
+  object-fit: cover;
+  vertical-align: bottom;
+  position: relative;
+  z-index: 0;
+  text-align: center;
+  cursor: pointer;
+}
+
+.card__photo:before {  
+  display: block;
+  border-radius: 10px 10px 0 0;
+  background-color: rgba(0, 0, 0, .9);
+  color: white;
+  top: 0;
+  height: 282px;
+  width: 282px;
+  position: absolute;
+}
+
+.card__photo:after {  
+  display: block;
+  position: absolute;
+  font-size: 12px;
+  content: "Извините, картинка не загрузилась";
+  top: 50%;
+  left: 40px;
+  color: white;
+}
