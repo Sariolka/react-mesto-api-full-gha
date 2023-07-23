@@ -34,17 +34,17 @@ function Header({ email, onSignOut, loggedIn }) {
       </div>
       <Routes>
         <Route
-          path="/sign-up"
+          path="/signup"
           element={
-            <Link to="/sign-in" className={!loggedIn && "header__link"}>
+            <Link to="/signin" className={!loggedIn && "header__link"}>
               Войти
             </Link>
           }
         />
         <Route
-          path="/sign-in"
+          path="/signin"
           element={
-            <Link to="/sign-up" className={`${!loggedIn && `header__link`}`}>
+            <Link to="/signup" className={`${!loggedIn && `header__link`}`}>
               Регистрация
             </Link>
           }

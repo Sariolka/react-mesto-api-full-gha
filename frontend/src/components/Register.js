@@ -30,6 +30,8 @@ function Register({ onRegister }) {
           required
           onChange={handleChange}
           value={formValue.email || ""}
+          minLength="6"
+          maxLength="100"
         />
         <input
           id="password"
@@ -40,11 +42,13 @@ function Register({ onRegister }) {
           required
           onChange={handleChange}
           value={formValue.password || ""}
+          minLength="5"
+          maxLength="100"
         />
         <button type="submit" className="auth__button-submit">
           Зарегистрироваться
         </button>
-        <Link to="/sign-in" className="auth__link">
+        <Link to="/signin" className="auth__link">
           Уже зарегистрированы? Войти
         </Link>
       </form>

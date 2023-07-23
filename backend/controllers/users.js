@@ -1,3 +1,4 @@
+require('dotenv').config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
@@ -7,6 +8,8 @@ const ConflictError = require('../errors/error-conflict');
 const UnauthorizedError = require('../errors/error-unauthorized');
 
 const { OK, CREATED } = require('../errors/errors');
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 const createUser = (req, res, next) => {
   const {
@@ -39,8 +42,8 @@ const login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, 'super-secret-key', { expiresIn: '7d' });
-      res.status(OK).send({ _id: token });
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+      res.status(OK).send({ token });
     })
     .catch(() => {
       throw new UnauthorizedError('Необходима авторизация');

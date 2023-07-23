@@ -13,7 +13,7 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import DeleteCardPopup from "./DeleteCardPopup";
 import InfoTooltip from "./InfoTooltip.js";
-import { api } from "../utils/api";
+import { Api } from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import Preloader from "./Preloader.js";
 
@@ -39,37 +39,34 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false);
 
   const navigate = useNavigate();
-
-  React.useEffect(() => {
-    api
-      .getUserInfo()
-      .then((user) => {
-        setCurrentUser(user);
-        console.log(user);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const api = new Api({
+    baseUrl: 'http://localhost:3001',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+    "Content-Type": "application/json",
+    },
+  });
 
   React.useEffect(() => {
     setLoading(true);
-    api
-      .getInitialCards()
-      .then((cards) => {
-        setCards(cards);
+    if(loggedIn) {
+      Promise.all([api.getUserInfo(), api.getInitialCards()])
+      .then(([user, cards]) => {
+        setCurrentUser(user);
+        setCards(cards.reverse());
         console.log(cards);
       })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => setLoading(false));
-  }, []);
+    }
+  }, [loggedIn]);
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((c) => c._id === currentUser._id);
+    const isLiked = card.likes.some((user) => user === currentUser._id);
     api
-      .changeLikeCardStatus(card, isLiked)
+      .changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
         setCards((state) =>
           state.map((c) => (c._id === card._id ? newCard : c))
@@ -139,8 +136,8 @@ function App() {
   function handleRegister(password, email) {
     auth
       .register(password, email)
-      .then(() => {
-        navigate("/sign-in", { replace: true });
+      .then((user) => {
+        navigate("/signin", { replace: true });
         setIsInfoTooltipPopupOpen(true);
         setIsSuccess(true);
       })
@@ -156,13 +153,10 @@ function App() {
     auth
       .authorize(password, email)
       .then((res) => {
-        if (res.token) {
-          localStorage.setItem("jwt", res.token);
-          setLoggedIn(true);
+          localStorage.setItem("token", res.token);
           setEmail(email);
-          console.log(email);
+          setLoggedIn(true);
           navigate("/", { replace: true });
-        }
       })
       .catch((err) => {
         console.log(err);
@@ -173,22 +167,21 @@ function App() {
   }
 
   function onSignOut() {
-    localStorage.removeItem("jwt");
+    localStorage.removeItem("token");
     setLoggedIn(false);
   }
 
   function handleTokenCheck() {
     setLoading(true);
-    if (localStorage.getItem("jwt")) {
-      const token = localStorage.getItem("jwt");
+      const token = localStorage.getItem("token");
+      if(token) {
       auth
         .checkToken(token)
         .then((res) => {
           if (res) {
             setIsInfoTooltipPopupOpen(false);
             setLoggedIn(true);
-            console.log(res.data.email);
-            setEmail(res.data.email);
+            setEmail(res.email);
             navigate("/", { replace: true });
           }
         })
@@ -196,7 +189,7 @@ function App() {
           console.log(err);
         })
         .finally(() => setLoading(false));
-    }
+      }
   }
 
   React.useEffect(() => {
@@ -239,10 +232,10 @@ function App() {
         <Header email={email} onSignOut={onSignOut} loggedIn={loggedIn} />
         <Routes>
           <Route
-            path="/sign-up"
+            path="/signup"
             element={<Register onRegister={handleRegister} />}
           />
-          <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
+          <Route path="/signin" element={<Login onLogin={handleLogin} />} />
           <Route
             path="/"
             element={
@@ -267,7 +260,7 @@ function App() {
           <Route
             path="*"
             element={
-              !loggedIn ? <Navigate to="/sign-up" /> : <Navigate to="/" />
+              !loggedIn ? <Navigate to="/signup" /> : <Navigate to="/" />
             }
           />
         </Routes>

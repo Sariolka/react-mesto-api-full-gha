@@ -13,7 +13,6 @@ class Api {
   }
 
   getInitialCards() {
-    //получить карточки
     return fetch(`${this._address}/cards`, {
       method: "GET",
       headers: this._headers,
@@ -28,26 +27,26 @@ class Api {
     }).then(this.getResponse);
   }
 
-  editUserProfile(data) {
+  editUserProfile(user) {
     //редактировать информацию о пользователе
     return fetch(`${this._address}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name: data.name,
-        about: data.about,
+        name: user.name,
+        about: user.about,
       }),
     }).then(this.getResponse);
   }
 
-  addNewCard(item) {
+  addNewCard(card) {
     //добавить новую карточку
     return fetch(`${this._address}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        name: item.name,
-        link: item.link,
+        name: card.name,
+        link: card.link,
       }),
     }).then(this.getResponse);
   }
@@ -60,36 +59,36 @@ class Api {
     }).then(this.getResponse);
   }
 
-  changeLikeCardStatus(card, isLiked) {
-    if (isLiked) {
-      return fetch(`${this._address}/cards/${card._id}/likes`, {
-        method: "DELETE",
+  changeLikeCardStatus(cardId, isLiked) {
+    if (!isLiked) {
+      return fetch(`${this._address}/cards/${cardId}/likes`, {
+        method: "PUT",
         headers: this._headers,
       }).then(this.getResponse);
     } else {
-      return fetch(`${this._address}/cards/${card._id}/likes`, {
-        method: "PUT",
+      return fetch(`${this._address}/cards/${cardId}/likes`, {
+        method: "DELETE",
         headers: this._headers,
       }).then(this.getResponse);
     }
   }
 
-  changeAvatar(data) {
-    //изменить аватар
+  changeAvatar(user) {
     return fetch(`${this._address}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: data.avatar,
+        avatar: user.avatar,
       }),
     }).then(this.getResponse);
   }
 }
 
-export const api = new Api({
-  baseUrl: `https://mesto.nomoreparties.co/v1/cohort-64`,
-  headers: {
-    authorization: "e266c9d4-7550-484d-9fea-f5c65957f0a5",
-    "Content-Type": "application/json",
-  },
-});
+//export const api = new Api({
+  //baseUrl: 'http://localhost:3001',
+  //headers: {
+  //  'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+  //  "Content-Type": "application/json",
+ // },
+//});
+export { Api }
