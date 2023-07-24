@@ -40,7 +40,7 @@ function App() {
 
   const navigate = useNavigate();
   const api = new Api({
-    baseUrl: 'http://localhost:3001',
+    baseUrl: 'http://localhost:3000',
     headers: {
       "Authorization": `Bearer ${localStorage.getItem('token')}`,
       "Content-Type": "application/json",
