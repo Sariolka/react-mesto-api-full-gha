@@ -16,7 +16,7 @@ const limiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
 });
-
+const { PORT = 3000 } = process.env;
 const app = express();
 app.use(cors({
   origin: ['http://sariolka.student.nomoredomains.xyz', 'http://api.sariolka.students.nomoredomains.xyz'],
@@ -33,6 +33,6 @@ app.use(router);
 app.use(errorLogger);
 app.use(errors());
 app.use(error);
-app.listen(3001, () => {
+app.listen(PORT, () => {
   console.log('Сервер запущен!');
 });
