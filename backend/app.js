@@ -2,10 +2,11 @@ require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { errors } = require('celebrate');
-const cors = require('./middlewares/cors');
+
 const router = require('./routes');
 const error = require('./middlewares/error');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -16,11 +17,15 @@ const limiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
 });
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
 const app = express();
+app.use(cors({
+  origin: ['http://sariolka.student.nomoredomains.xyz', 'http://api.sariolka.students.nomoredomains.xyz', 'http://localhost:3001', 'http://localhost:3000'],
+  credentials: true,
+}));
 app.use(express.json());
 app.use(requestLogger);
-app.use(cors);
+
 
 app.use(helmet());
 app.use(limiter);
