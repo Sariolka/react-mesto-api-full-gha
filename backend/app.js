@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { errors } = require('celebrate');
-const cors = require('cors');
+const cors = require('./middlewares/cors');
 const router = require('./routes');
 const error = require('./middlewares/error');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -20,11 +20,7 @@ const limiter = rateLimit({
 const { PORT = 3000 } = process.env;
 const app = express();
 app.use(express.json());
-app.use(cors({
-  origin: ['http://sariolka.student.nomoredomains.xyz', 'https://sariolka.student.nomoredomains.xyz', 'https://api.sariolka.students.nomoredomains.xyz', 'http://api.sariolka.students.nomoredomains.xyz', 'https://localhost:3001', 'https://localhost:3000', 'http://localhost:3000', 'http://localhost:3001'],
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-}));
+app.use(cors);
 
 app.use(requestLogger);
 
