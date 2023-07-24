@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.57.130
+IP 158.160.57.130
 
 Frontend https://sariolka.student.nomoredomains.xyz
 
