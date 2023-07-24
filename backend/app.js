@@ -19,7 +19,7 @@ const limiter = rateLimit({
 
 const app = express();
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3001'],
+  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://sariolka.student.nomoredomains.xyz', 'http://api.sariolka.students.nomoredomains.xyz'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
