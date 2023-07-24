@@ -40,7 +40,7 @@ function App() {
 
   const navigate = useNavigate();
   const api = new Api({
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'http://api.sariolka.students.nomoredomains.xyz',
     headers: {
       "Authorization": `Bearer ${localStorage.getItem('token')}`,
       "Content-Type": "application/json",
@@ -60,7 +60,7 @@ function App() {
       })
       .finally(() => setLoading(false));
     }
-  }, [api, loggedIn]);
+  }, [loggedIn]);
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((user) => user === currentUser._id);
