@@ -18,11 +18,13 @@ const limiter = rateLimit({
 });
 const { PORT = 3000 } = process.env;
 const app = express();
-app.use(cors({
-  origin: ['https://sariolka.student.nomoredomains.xyz', 'https://api.sariolka.students.nomoredomains.xyz'],
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-}));
+app.use(cors());
+
+//app.use(cors({
+  //origin: ['https://sariolka.student.nomoredomains.xyz', 'https://api.sariolka.students.nomoredomains.xyz'],
+  //methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  //credentials: true,
+//}));
 
 app.use(helmet());
 app.use(limiter);
