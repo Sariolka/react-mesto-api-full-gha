@@ -20,12 +20,7 @@ const { PORT = 3000 } = process.env;
 const app = express();
 app.use(express.json());
 app.use(requestLogger);
-app.use(cors({
-  origin: ['https://sariolka.student.nomoredomains.xyz', 'https://api.sariolka.students.nomoredomains.xyz',
-    'http://sariolka.student.nomoredomains.xyz', 'http://api.sariolka.students.nomoredomains.xyz', 'localhost:3000',
-    'http://localhost:3000', 'https://localhost:3000', 'localhost:3001', 'http://localhost:3001'],
-  credentials: true,
-}));
+app.use(cors());
 
 app.use(helmet());
 app.use(limiter);
