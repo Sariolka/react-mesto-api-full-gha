@@ -1,4 +1,4 @@
-export const BASE_URL = "http://api.sariolka.students.nomoredomains.xyz";
+export const BASE_URL = "https://api.sariolka.students.nomoredomains.xyz";
 
 const getResponse = (res) => {
   if (res.ok) {

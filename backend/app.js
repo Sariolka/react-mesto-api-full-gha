@@ -21,7 +21,7 @@ const { PORT = 3000 } = process.env;
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: ['http://sariolka.student.nomoredomains.xyz', 'https://sariolka.student.nomoredomains.xyz', 'https://api.sariolka.students.nomoredomains.xyz', 'http://api.sariolka.students.nomoredomains.xyz', 'http://localhost:3001', 'http://localhost:3000'],
+  origin: ['http://sariolka.student.nomoredomains.xyz', 'https://sariolka.student.nomoredomains.xyz', 'https://api.sariolka.students.nomoredomains.xyz', 'http://api.sariolka.students.nomoredomains.xyz', 'https://localhost:3001', 'https://localhost:3000', 'http://localhost:3000', 'http://localhost:3001'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));

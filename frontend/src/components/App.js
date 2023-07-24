@@ -40,7 +40,7 @@ function App() {
 
   const navigate = useNavigate();
   const api = new Api({
-    baseUrl: 'http://api.sariolka.students.nomoredomains.xyz',
+    baseUrl: 'https://api.sariolka.students.nomoredomains.xyz',
     headers: {
       "Authorization": `Bearer ${localStorage.getItem('token')}`,
       "Content-Type": "application/json",
