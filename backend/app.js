@@ -21,6 +21,7 @@ const { PORT = 3000 } = process.env;
 const app = express();
 app.use(cors({
   origin: ['http://sariolka.student.nomoredomains.xyz', 'http://api.sariolka.students.nomoredomains.xyz', 'http://localhost:3001', 'http://localhost:3000'],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
 app.use(express.json());
