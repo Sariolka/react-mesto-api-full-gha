@@ -238,7 +238,9 @@ function App() {
           <Route
             path="/"
             element={
-              loggedIn ? (
+              loading ? (
+                <Preloader loading={loading} />
+              ) : (
                 <ProtectedRoute
                   element={Main}
                   loggedIn={loggedIn}
@@ -251,8 +253,6 @@ function App() {
                   onCardDelete={handleOpenCardDeletePopup}
                   cards={cards}
                 />
-              ) : (
-                <Navigate to="/signup" />
               )
             }
           />
