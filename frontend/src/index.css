@@ -15,6 +15,7 @@
 @import url(./blocks/header/__login-mobile/header__login-mobile.css);
 @import url(./blocks/header/__open-menu/header__open-menu.css);
 @import url(./blocks/header/__mobile-signout/header__mobile-signout.css);
+@import url(./blocks/header/__button/_inactive/header__button_inactive.css);
 /*profile*/
 @import url(./blocks/profile/profile.css);
 @import url(./blocks/profile/__avatar-button/profile__avatar-button.css);
