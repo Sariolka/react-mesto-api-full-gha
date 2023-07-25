@@ -38,6 +38,7 @@ function App() {
   const [loading, setLoading] = React.useState(true);
   const [isLoading, setIsLoading] = React.useState(false);
 
+  const navigate = useNavigate();
   const api = new Api({
     baseUrl: 'https://api.sariolka.students.nomoredomains.xyz',
     headers: {
@@ -45,7 +46,6 @@ function App() {
       "Content-Type": "application/json",
     },
   });
-  const navigate = useNavigate();
 
   React.useEffect(() => {
     setLoading(true);
@@ -60,7 +60,7 @@ function App() {
       })
       .finally(() => setLoading(false));
     }
-  }, [api, loggedIn]);
+  }, [loggedIn]);
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((user) => user === currentUser._id);
@@ -240,7 +240,7 @@ function App() {
             element={
               loading ? (
                 <Preloader loading={loading} />
-              ) : (loggedIn ? (
+              ) : (
                 <ProtectedRoute
                   element={Main}
                   loggedIn={loggedIn}
@@ -253,7 +253,7 @@ function App() {
                   onCardDelete={handleOpenCardDeletePopup}
                   cards={cards}
                 />
-              ) : <Navigate to="/signup" />)
+              )
             }
           />
           <Route

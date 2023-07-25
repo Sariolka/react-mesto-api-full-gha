@@ -62,7 +62,7 @@ function Header({ email, onSignOut, loggedIn }) {
             >
               <p className="header__email">{email}</p>
               <button
-                className="header__button"
+                className = {`${loggedIn && `header__button`}`}
                 onClick={signOut}
                 aria-label="Выйти"
               >
