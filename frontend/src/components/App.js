@@ -40,25 +40,25 @@ function App() {
 
   const navigate = useNavigate();
   const api = new Api({
-    baseUrl: 'https://api.sariolka.students.nomoredomains.xyz',
+    baseUrl: "https://api.sariolka.students.nomoredomains.xyz",
     headers: {
-      "Authorization": `Bearer ${localStorage.getItem('token')}`,
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
       "Content-Type": "application/json",
     },
   });
 
   React.useEffect(() => {
     setLoading(true);
-    if(loggedIn) {
+    if (loggedIn) {
       Promise.all([api.getUserInfo(), api.getInitialCards()])
-      .then(([user, cards]) => {
-        setCurrentUser(user);
-        setCards(cards.reverse());
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => setLoading(false));
+        .then(([user, cards]) => {
+          setCurrentUser(user);
+          setCards(cards.reverse());
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => setLoading(false));
     }
   }, [loggedIn]);
 
@@ -152,10 +152,10 @@ function App() {
     auth
       .authorize(password, email)
       .then((res) => {
-          localStorage.setItem("token", res.token);
-          setEmail(email);
-          setLoggedIn(true);
-          navigate("/", { replace: true });
+        localStorage.setItem("token", res.token);
+        setEmail(email);
+        setLoggedIn(true);
+        navigate("/", { replace: true });
       })
       .catch((err) => {
         console.log(err);
@@ -172,8 +172,8 @@ function App() {
 
   function handleTokenCheck() {
     setLoading(true);
-      const token = localStorage.getItem("token");
-      if(token) {
+    const token = localStorage.getItem("token");
+    if (token) {
       auth
         .checkToken(token)
         .then((res) => {
@@ -188,7 +188,7 @@ function App() {
           console.log(err);
         })
         .finally(() => setLoading(false));
-      }
+    }
   }
 
   React.useEffect(() => {
@@ -238,6 +238,9 @@ function App() {
           <Route
             path="/"
             element={
+              loading ? (
+                <Preloader loading={loading} />
+              ) : (
                 <ProtectedRoute
                   element={Main}
                   loggedIn={loggedIn}
@@ -250,6 +253,7 @@ function App() {
                   onCardDelete={handleOpenCardDeletePopup}
                   cards={cards}
                 />
+              )
             }
           />
           <Route
