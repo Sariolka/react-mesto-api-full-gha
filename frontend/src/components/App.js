@@ -240,7 +240,7 @@ function App() {
             element={
               loading ? (
                 <Preloader loading={loading} />
-              ) : (loggedIn ? <Navigate to="/signup" /> : (
+              ) : (!loggedIn ? <Navigate to="/signup" /> : (
                 <ProtectedRoute
                   element={Main}
                   loggedIn={loggedIn}
