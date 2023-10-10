@@ -5,7 +5,8 @@ const allowedCors = [
   'http://api.sariolka.students.nomoredomains.xyz',
   'localhost:3000',
   'http://localhost:3000',
-  'https://localhost:3000'];
+  'https://localhost:3000',
+];
 
 const cors = (req, res, next) => {
   const { origin } = req.headers;

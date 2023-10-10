@@ -20,7 +20,6 @@ class Api {
   }
 
   getUserInfo() {
-    // получить информацию о пользователе
     return fetch(`${this._address}/users/me`, {
       method: "GET",
       headers: this._headers,
@@ -28,7 +27,6 @@ class Api {
   }
 
   editUserProfile(user) {
-    //редактировать информацию о пользователе
     return fetch(`${this._address}/users/me`, {
       method: "PATCH",
       headers: this._headers,
@@ -40,7 +38,6 @@ class Api {
   }
 
   addNewCard(card) {
-    //добавить новую карточку
     return fetch(`${this._address}/cards`, {
       method: "POST",
       headers: this._headers,
@@ -52,7 +49,6 @@ class Api {
   }
 
   deleteCard(card) {
-    //удалить карточку
     return fetch(`${this._address}/cards/${card._id}`, {
       method: "DELETE",
       headers: this._headers,
@@ -84,11 +80,4 @@ class Api {
   }
 }
 
-//export const api = new Api({
-  //baseUrl: 'http://localhost:3001',
-  //headers: {
-  //  'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
-  //  "Content-Type": "application/json",
- // },
-//});
-export { Api }
+export { Api };

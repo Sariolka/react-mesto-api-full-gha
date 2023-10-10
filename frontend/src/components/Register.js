@@ -4,7 +4,6 @@ import { useForm } from "../hooks/useForm";
 
 function Register({ onRegister }) {
   const { formValue, handleChange } = useForm({});
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();

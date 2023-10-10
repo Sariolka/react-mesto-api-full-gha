@@ -15,7 +15,6 @@ import DeleteCardPopup from "./DeleteCardPopup";
 import InfoTooltip from "./InfoTooltip.js";
 import { Api } from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import Preloader from "./Preloader.js";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
