@@ -9,11 +9,24 @@
 
 Адрес репозитория: https://github.com/Sariolka/react-mesto-api-full-gha
 
-### Запуск проекта  
-* Для запуска фронтенда npm run start
-* Для запуска сервера npm run dev
+## Инструкция по установке:
 
-### Инструменты и стек: 
+Клонировать репозиторий:
+
+`
+git clone git@github.com:Sariolka/react-mesto-api-full-gha.git
+`
+
+В директории проекта запустить приложение в режиме разработки:
+
+```
+ npm install - устанавливает зависимости; 
+ npm run dev - запускает сервер; 
+ npm run start - запускает сервер с hot-reload;
+```  
+   
+
+## Инструменты и стек: 
 * HTML  
 * CSS  
 * React  
